@@ -1,3 +1,5 @@
+/*
+
 // View
 
 SearchView = Backbone.View.extend({
@@ -53,8 +55,6 @@ Person = Backbone.Model.extend({
 		}
 	}
 });
-
-/*
 
 // Validation example 
 
@@ -135,7 +135,6 @@ user.destroy({
 		console.log('Destroyed!');
 	}
 });
-*/
 
 var Song = Backbone.Model.extend({
 	defaults: {
@@ -169,3 +168,38 @@ var song3 = new Song({
 var myAlbum = new Album([ song1, song2, song3]);
 
 console.log( myAlbum.toJSON() );
+
+*/
+
+// Router example
+
+var AppRouter = Backbone.Router.extend({
+	routes: {
+		"download/*path": "downloadFile",
+		":route/:action": "loadView",
+		"posts/:id": "getPost"
+	}
+});
+
+var app_router = new AppRouter();
+
+app_router.on('route:getPost', function(id) {
+	console.log("getPost id:");
+	console.log(id);
+});
+
+app_router.on('route:defaultRoute', function(actions) {
+	console.log("actions");
+	console.log(actions);
+});
+
+app_router.on('route:downloadFile', function(path) {
+	console.log("downloadFile path:");
+	console.log(path);
+});
+
+app_router.on('route:loadView', function(route, action) {
+	console.log(route + " _ " + action);
+});
+
+Backbone.history.start();
