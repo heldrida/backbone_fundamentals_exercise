@@ -54,6 +54,10 @@ Person = Backbone.Model.extend({
 	}
 });
 
+/*
+
+// Validation example 
+
 var person = new Person();
 
 person.set({
@@ -64,7 +68,7 @@ person.set({
 });
 
 
-/*
+
 // Interacting wih the server
 
 var UserModel = Backbone.Model.extend({
@@ -133,3 +137,35 @@ user.destroy({
 });
 */
 
+var Song = Backbone.Model.extend({
+	defaults: {
+		name: "Not specified",
+		artist: "Not specified"
+	},
+	initialize: function(){
+		console.log("Music is the answer");
+	}
+});
+
+var Album = Backbone.Collection.extend({
+	model: Song
+});
+
+var song1 = new Song({
+	name: "How Bizarre",
+	artist: "OMC"
+});
+
+var song2 = new Song({
+	name: "Flip flops",
+	artist: "FUTURE"
+});
+
+var song3 = new Song({
+	name: "Zubar Foo",
+	artist: "LOEE"
+});
+
+var myAlbum = new Album([ song1, song2, song3]);
+
+console.log( myAlbum.toJSON() );
